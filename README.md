@@ -1,2 +1,2 @@
-# project-euler-in-lisp
+# Project Euler in Lisp
 Lisp Utilities for Project Euler
