@@ -14,15 +14,24 @@
   (=
    (ld n) n))
 
-(defun mult3or5p (n)
+(defun mult-3-or-5-p (n)
   (cond ((= 0 (mod n 3)) t)
         ((= 0 (mod n 5)) t)
         (t nil)))
 
+(defun number-sequence (start stop &optional (step 1))
+  (loop for n from start to stop by step
+       collect n))
 
+(defun mult-3-or-5-range (n)
+  (remove-if-not #'mult-3-or-5-p (number-sequence 1 n)))
+
+
+;; Testing
+;;(mult-3-or-5-range 100)
+;;(number-sequence 1 100 2)
 ;;(mod 3 13)
 ;;(mult3or5p 13)
-;; Testing
 ;;(divp 5 235)
 ;;(ld 45905909)
-;;(prime0 137)
+;;(prime0 132)
