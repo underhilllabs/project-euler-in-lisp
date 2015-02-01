@@ -34,16 +34,64 @@
 
 (defun fizbuzz (n)
   (mapcar #'fizbuzz-num (number-sequence 1 n)))
-(fizbuzz-num 15)
-(mapcar #'fizbuzz-num (number-sequence 1 100))
-(equal 0 (mod 9 3))
-(mod 9 3)    
 
-;; Testing
-;;(mult-3-or-5-range 100)
-;;(number-sequence 1 100 2)
-;;(mod 3 13)
-;;(mult3or5p 13)
-;;(divp 5 235)
-;;(ld 45905909)
-;;(prime0 132)
+(defun fibo (n)
+	(cond ((= 0 n) 1)
+				((= 1 n) 1)
+				(t (+ (fibo (- n 1)) (fibo (- n 2))))))
+
+(defun fibo-list (n)
+	(mapcar #'fibo (number-sequence 1 n)))
+
+(defun factorial (n)
+	(cond ((= 0 n) 1)
+				(t (reduce #'* (number-sequence 1 n)))))
+
+(defun number-to-list (n)
+	(loop for c across (write-to-string n) collect (digit-char-p c)))
+
+(defun factors (n)
+	(loop for c from 2 below n when (divp c n) collect c))
+
+(defun prime-factors (n)
+	(remove-if-not #'prime0 (factors n)))
+
+(defun palindrome-p (s)
+	(equal s (reverse s)))
+
+(defun pal-num-p (n)
+	(equal (write-to-string n) (reverse (write-to-string n))))
+
+(defun div-by-1-20-p (n)
+	(loop for c from 11 to 20 always (divp c n)))
+
+(defun read-lines-into-sum (file-name)
+	(let ((in (open file-name :if-does-not-exist nil))
+				(total 0))
+		(when in
+			(loop for line = (read-line in nil)
+					 while line do (setf total (+ (parse-integer line) total)))
+		(close in))
+		total))
+
+(defun read-lines-into-list (file-name)
+	(let ((in (open file-name :if-does-not-exist nil))
+				(my-list ()))
+		(when in
+			(loop for line = (read-line in nil)
+					 while line do (setf my-list (cons (parse-integer line) my-list)))
+			(close in))
+		my-list))
+
+;;(reduce #'+ (read-lines-into-list "nums.txt"))
+
+;(pal-num-p 1232)
+;;(palindrome-p "lapal")
+;;(palindrome-p "1232")
+
+;;(prime-factors 600851475143)
+
+;(reduce #'+ (mult-3-or-5-range 1 999))
+;(reduce #'+ (number-to-list (factorial 1000)))
+;(reduce #'+ (number-to-list (expt 2 1000)))
+
