@@ -26,6 +26,18 @@
 (defun mult-3-or-5-range (n)
   (remove-if-not #'mult-3-or-5-p (number-sequence 1 n)))
 
+(defun fizbuzz-num (n)
+  (cond ((and (= 0 (mod n 3)) (= 0 (mod n 5))) 'fizzbuzz)
+        ((= 0 (mod n 3)) 'fizz)
+        ((= 0 (mod n 5)) 'buzz)
+        (t n)))
+
+(defun fizbuzz (n)
+  (mapcar #'fizbuzz-num (number-sequence 1 n)))
+(fizbuzz-num 15)
+(mapcar #'fizbuzz-num (number-sequence 1 100))
+(equal 0 (mod 9 3))
+(mod 9 3)    
 
 ;; Testing
 ;;(mult-3-or-5-range 100)
