@@ -2,6 +2,10 @@
 
 ### range 
 ```
+(defun number-sequence (start stop &optional (step 1))
+	(loop for n from start to stop by step
+		collect n))
+
 (number-sequence 1 1000000)
 ```
 
