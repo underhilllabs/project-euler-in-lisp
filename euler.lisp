@@ -23,6 +23,8 @@
   (loop for n from start to stop by step
        collect n))
 
+
+
 (defun mult-3-or-5-range (n)
   (remove-if-not #'mult-3-or-5-p (number-sequence 1 n)))
 
@@ -82,6 +84,23 @@
 					 while line do (setf my-list (cons (parse-integer line) my-list)))
 			(close in))
 		my-list))
+
+(defun read-lines-into-number (file-name)
+	(let ((in (open file-name :if-does-not-exist nil))
+				(my-list ()))
+		(when in
+			(loop for line = (read-line in nil)
+					 while line do (append my-list (list (parse-integer line))))
+			(close in))
+		(concatenate 'string my-list)))
+
+(defun square (x) (* x x))
+
+(defun diff-sum-squares-and-squared-sum (n)
+	(- (square (reduce #'+ (number-sequence 1 n)))
+		 (reduce #'+ (mapcar #'square (number-sequence 1 n)))))
+	 
+;;(read-lines-into-number "nums8.txt")
 
 ;;(reduce #'+ (read-lines-into-list "nums.txt"))
 
