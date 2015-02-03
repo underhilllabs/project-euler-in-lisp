@@ -99,6 +99,22 @@
 (defun diff-sum-squares-and-squared-sum (n)
 	(- (square (reduce #'+ (number-sequence 1 n)))
 		 (reduce #'+ (mapcar #'square (number-sequence 1 n)))))
+
+(defun odd (n)
+	(= (mod n 2) 1))
+(defun collatz-num (n)
+	(cond ((= n 1) 1)
+				((odd n) (1+ (* 3 n)))
+				(t (/ n 2))))
+
+(defun collatz-chain (n)
+	(setq x (collatz-num n))
+	(cond ((= n 1) nil)
+				(t (list x (collatz-chain x)))))
+
+(collatz-num 1)
+(collatz-chain 3)
+
 	 
 ;;(read-lines-into-number "nums8.txt")
 
