@@ -112,8 +112,16 @@
 	(cond ((= n 1) nil)
 				(t (cons x (collatz-chain x)))))
 
+(defun collatz-chain-num (n)
+	(setq x (collatz-num n))
+	(cond ((= n 1) 1)
+				(t (1+ (collatz-chain-num x)))))
+
+
+
 ;;(collatz-num 1)
 ;;(collatz-chain 3)
+(collatz-chain-num 13)
 
 	 
 ;;(read-lines-into-number "nums8.txt")
