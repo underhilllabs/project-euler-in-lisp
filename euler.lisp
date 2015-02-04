@@ -117,8 +117,8 @@
   (cond ((= n 1) 1)
         (t (1+ (collatz-chain-num x)))))
 
-
-(reduce #'+ (mapcar (lambda (x) (expt x x)) (number-sequence 1 1000)))
+(defun self-powers (n)
+  (reduce #'+ (mapcar (lambda (x) (expt x x)) (number-sequence 1 n)))
 
 ;;(collatz-num 1)
 ;;(collatz-chain 3)
