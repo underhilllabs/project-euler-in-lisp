@@ -23,8 +23,6 @@
   (loop for n from start to stop by step
         collect n))
 
-
-
 (defun mult-3-or-5-range (n)
   (remove-if-not #'mult-3-or-5-p (number-sequence 1 n)))
 
@@ -102,6 +100,7 @@
 
 (defun odd (n)
   (= (mod n 2) 1))
+
 (defun collatz-num (n)
   (cond ((= n 1) 1)
         ((odd n) (1+ (* 3 n)))
@@ -120,22 +119,26 @@
 (defun self-powers (n)
   (reduce #'+ (mapcar (lambda (x) (expt x x)) (number-sequence 1 n)))
 
+(defparameter *max-chains* 1)
+(defparameter *max-chain-num* 1)
+(defun find-max-chain-num (n)
+  (mapcar  (lambda (num num-chains) 
+             (when (> num-chains *max-chains)
+               (setq *max-chains num-chains)
+               (setq *max-chain-num* num)))
+           (mapcar #'collatz-chain-num (number-sequence 1 n))))
+ 
+
 ;;(collatz-num 1)
 ;;(collatz-chain 3)
 ;;(collatz-chain-num 13)
-
-
 ;;(read-lines-into-number "nums8.txt")
-
 ;;(reduce #'+ (read-lines-into-list "nums.txt"))
-
-                                        ;(pal-num-p 1232)
+;;(pal-num-p 1232)
 ;;(palindrome-p "lapal")
 ;;(palindrome-p "1232")
-
 ;;(prime-factors 600851475143)
-
-                                        ;(reduce #'+ (mult-3-or-5-range 1 999))
-                                        ;(reduce #'+ (number-to-list (factorial 1000)))
-                                        ;(reduce #'+ (number-to-list (expt 2 1000)))
+;;(reduce #'+ (mult-3-or-5-range 1 999))
+;;(reduce #'+ (number-to-list (factorial 1000)))
+;;(reduce #'+ (number-to-list (expt 2 1000)))
 
