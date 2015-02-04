@@ -118,6 +118,7 @@
         (t (1+ (collatz-chain-num x)))))
 
 
+(reduce #'+ (mapcar (lambda (x) (expt x x)) (number-sequence 1 1000)))
 
 ;;(collatz-num 1)
 ;;(collatz-chain 3)
