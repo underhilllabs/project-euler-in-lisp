@@ -117,7 +117,7 @@
         (t (1+ (collatz-chain-num x)))))
 
 (defun self-powers (n)
-  (reduce #'+ (mapcar (lambda (x) (expt x x)) (number-sequence 1 n)))
+  (reduce #'+ (mapcar (lambda (x) (expt x x)) (number-sequence 1 n))))
 
 (defparameter *max-chains* 1)
 (defparameter *max-chain-num* 1)
@@ -127,7 +127,19 @@
                (setq *max-chains num-chains)
                (setq *max-chain-num* num)))
            (mapcar #'collatz-chain-num (number-sequence 1 n))))
- 
+
+;; How to define a macro
+;; flip flop flop
+(defmacro my-when (condition &rest body)
+  `(if ,condition (progn ,@body)))
+
+(defmacro my-unless (condition &rest body)
+  `(if (not ,condition) (progn ,@body)))
+
+;; (my-when t
+;;          (prin1 "it works")
+;;          (prin1 "hurray!"))
+
 
 ;;(collatz-num 1)
 ;;(collatz-chain 3)
