@@ -38,3 +38,16 @@ real example:
 
 #### case
 
+## Lisp Notes
+
+### defmacro
+
+Reimplement the when macro.
+
+```
+(defmacro my-when (condition &rest body)
+    `(if ,condition (progn ,@body)))
+```
+
+
+
