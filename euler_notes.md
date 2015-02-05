@@ -1,7 +1,7 @@
 ## Lisp Math Notes
 
 ### range 
-```Common Lisp
+```lisp
 (defun number-sequence (start stop &optional (step 1))
 	(loop for n from start to stop by step
 		collect n))
@@ -16,7 +16,7 @@
 
 ### Conditionals
 #### cond
-```Common Lisp
+```lisp
 (cond ((test1) result1)
       ((test2) (result2a result2b))
       (t defaultresult))
@@ -24,7 +24,7 @@
 
 real example:
 
-```Common Lisp
+```lisp
   (cond ((divp k n) k)
         ((> (expt k 2) n) n)
         (t (ldf (1+ k) n))))
@@ -44,7 +44,7 @@ real example:
 
 Reimplement the when macro.
 
-```Common Lisp
+```lisp
 (defmacro my-when (condition &rest body)
     `(if ,condition (progn ,@body)))
 ```
