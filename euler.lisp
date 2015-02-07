@@ -107,14 +107,17 @@
         (t (/ n 2))))
 
 (defun collatz-chain (n)
-  (setq x (collatz-num n))
+  (setf x (collatz-num n))
   (cond ((= n 1) nil)
         (t (cons x (collatz-chain x)))))
 
 (defun collatz-chain-num (n)
-  (setq x (collatz-num n))
+  (setf x (collatz-num n))
   (cond ((= n 1) 1)
         (t (1+ (collatz-chain-num x)))))
+
+(defun collatz-list (max)
+  (mapcar (lambda(x) (cons x (list (collatz-chain-num x)))) (number-sequence 1 max)))
 
 (defun self-powers (n)
   (reduce #'+ (mapcar (lambda (x) (expt x x)) (number-sequence 1 n))))
@@ -124,9 +127,13 @@
 (defun find-max-chain-num (n)
   (mapcar  (lambda (num num-chains) 
              (when (> num-chains *max-chains)
-               (setq *max-chains num-chains)
-               (setq *max-chain-num* num)))
+               (setf *max-chains num-chains)
+               (setf *max-chain-num* num)))
            (mapcar #'collatz-chain-num (number-sequence 1 n))))
+(find-max-chain-num)
+(print *max-chain-num*)
+(print *max-chains*)
+
 
 ;; How to define a macro
 ;; flip flop flop
@@ -153,7 +160,9 @@
 ;;       for x = 0 then y
 ;;       and y = 1 then (+ x y)
 ;;       collect (+ x y)) 
+;(mapcar #'collatz-chain-num (number-sequence 1 10))
 
+;(collatz-list 100)
 ;;(collatz-num 1)
 ;;(collatz-chain 3)
 ;;(collatz-chain-num 13)
