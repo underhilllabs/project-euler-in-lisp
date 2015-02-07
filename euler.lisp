@@ -130,9 +130,9 @@
                (setf *max-chains num-chains)
                (setf *max-chain-num* num)))
            (mapcar #'collatz-chain-num (number-sequence 1 n))))
-(find-max-chain-num)
-(print *max-chain-num*)
-(print *max-chains*)
+;;(find-max-chain-num)
+;;(print *max-chain-num*)
+;;(print *max-chains*)
 
 
 ;; How to define a macro
@@ -149,6 +149,18 @@
 (defun word-sum (word)
   (loop for c across word 
        summing (char-num c)))
+
+(defun multiply-ord-word-sum (num word)
+  (* num (word-sum word)))
+
+(defun sort-and-total-names()
+  (let ((names (read (open "/home/bart/projects/project-euler-in-lisp/p022_names.txt"))))
+    (loop 
+       for w in (sort names #'string-lessp)
+       and x = 1 then (+ 1 x) 
+       summing (multiply-ord-word-sum x w))))
+;(sort-and-total-names)
+
 ;(word-sum "SEAMUS")
 
 ;; (my-when t
