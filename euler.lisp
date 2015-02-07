@@ -136,10 +136,23 @@
 (defmacro my-unless (condition &rest body)
   `(if (not ,condition) (progn ,@body)))
 
+(defun char-num (c)
+  (- (char-code c) 64))
+;;(char-num #\A)
+(defun word-sum (word)
+  (loop for c across word 
+       summing (char-num c)))
+;(word-sum "SEAMUS")
+
 ;; (my-when t
 ;;          (prin1 "it works")
 ;;          (prin1 "hurray!"))
 
+;; fibonacci
+;; (loop repeat 5 
+;;       for x = 0 then y
+;;       and y = 1 then (+ x y)
+;;       collect (+ x y)) 
 
 ;;(collatz-num 1)
 ;;(collatz-chain 3)
