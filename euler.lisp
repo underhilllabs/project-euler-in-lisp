@@ -122,18 +122,32 @@
 (defun self-powers (n)
   (reduce #'+ (mapcar (lambda (x) (expt x x)) (number-sequence 1 n))))
 
-(defparameter *max-chains* 1)
-(defparameter *max-chain-num* 1)
-(defun find-max-chain-num (n)
-  (mapcar  (lambda (num num-chains) 
-             (when (> num-chains *max-chains)
-               (setf *max-chains num-chains)
-               (setf *max-chain-num* num)))
-           (mapcar #'collatz-chain-num (number-sequence 1 n))))
-;;(find-max-chain-num)
+(defun find-max-chain-nums(n)
+  "Finds the longest chain and prints it out."
+  (let ((max-chains 1)
+        (max-chain-num 1))
+    (mapc (lambda (num-chains num) 
+            (when (> num-chains max-chains)
+              (setf max-chains num-chains)
+              (setf max-chain-num num)))
+          (mapcar #'collatz-chain-num (number-sequence 1 n))
+          (number-sequence 1 n))
+    (format nil "The max chains count was: ~a, created by ~a" max-chains max-chain-num)))
+;;(*max-chain-num*)
+;;(*max-chains*)
+(format nil "The max chains count was: ~a" *max-chains*)
+(find-max-chain-nums 1000)
+(defun find-max-chain (n)
+  (loop for x from 1 below (1+ n)
+   for i in 
+       (mapcar #'collatz-chain-num (number-sequence 1 n))
+  maximize (car (cons i x))))
+;(find-max-chain 10000)
+
+;;(find-max-chain-num 1000)
 ;;(print *max-chain-num*)
 ;;(print *max-chains*)
-
+;;(mapcar #'collatz-chain-num (number-sequence 1 100))
 
 ;; How to define a macro
 ;; flip flop flop
