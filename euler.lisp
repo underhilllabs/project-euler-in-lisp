@@ -154,12 +154,51 @@
   (* num (word-sum word)))
 
 (defun sort-and-total-names()
-  (let ((names (read (open "/home/bart/projects/project-euler-in-lisp/p022_names.txt"))))
+  (let ((names (read (open "/home/bart/projects/project-euler-in-lisp/p22_names.txt"))))
     (loop 
        for w in (sort names #'string-lessp)
        and x = 1 then (+ 1 x) 
        summing (multiply-ord-word-sum x w))))
 ;(sort-and-total-names)
+
+;(pal-num-p 12321)
+(defun find-max-pal-product ()
+  (loop
+     for x from 100 to 999
+     maximize (loop for y from 100 to 999
+                when (pal-num-p (* x y))
+                maximize (* x y))))
+;(find-max-pal-product)
+;(parse-integer "10")
+
+(defun sum-digits-quint (n)
+  (reduce #'+
+          (mapcar (lambda(n)
+                    (expt n 5))
+                  (loop for c across (write-to-string n) collect (digit-char-p c)))))
+(defun sum-quint-equal-p (n)
+  "Test if the number equals the sum of the number's digits taken to power of 5."
+  (= n (sum-digits-quint n)))
+(defun sum-quint-equal-range (n)
+  "The sum of all numbers to n that equal the sum of the number's digits to the 5th"
+  (reduce #'+
+          (remove-if-not #'sum-quint-equal-p (number-sequence 2 n))))
+;(sum-quint-equal-range 2000000)
+
+(defun sum-digits-quad (n)
+  (reduce #'+
+          (mapcar (lambda(n)
+                    (expt n 4))
+                  (loop for c across (write-to-string n) collect (digit-char-p c)))))
+(defun sum-quad-equal-p (n)
+  (= n (sum-digits-quad n)))
+
+(defun sum-quad-equal-range (n)
+  (remove-if-not #'sum-quad-equal-p (number-sequence 1 n)))
+
+;(sum-quad-equal-range 10000)
+;(sum-digits-quint 123)
+;(sum-digits-quad 8208)
 
 ;(word-sum "SEAMUS")
 
