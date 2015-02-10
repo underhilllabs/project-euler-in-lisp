@@ -133,21 +133,14 @@
           (mapcar #'collatz-chain-num (number-sequence 1 n))
           (number-sequence 1 n))
     (format nil "The max chains count was: ~a, created by ~a" max-chains max-chain-num)))
-;;(*max-chain-num*)
-;;(*max-chains*)
-(format nil "The max chains count was: ~a" *max-chains*)
-(find-max-chain-nums 1000)
+
+;(find-max-chain-nums 1000)
 (defun find-max-chain (n)
   (loop for x from 1 below (1+ n)
    for i in 
        (mapcar #'collatz-chain-num (number-sequence 1 n))
   maximize (car (cons i x))))
 ;(find-max-chain 10000)
-
-;;(find-max-chain-num 1000)
-;;(print *max-chain-num*)
-;;(print *max-chains*)
-;;(mapcar #'collatz-chain-num (number-sequence 1 100))
 
 ;; How to define a macro
 ;; flip flop flop
@@ -210,34 +203,27 @@
 (defun sum-quad-equal-range (n)
   (remove-if-not #'sum-quad-equal-p (number-sequence 1 n)))
 
-;(sum-quad-equal-range 10000)
-;(sum-digits-quint 123)
-;(sum-digits-quad 8208)
+;; fast fibonacci
+(defun sum-even-fibs(max)
+  (reduce #'+
+          (remove-if-not (lambda(n)
+                           (and (evenp n) (< n max)))
+                         (loop 
+                            for x = 0 then y
+                            and y = 1 then (+ x y)
+                            until (> x 4000000)
+                            collect (+ x y)))))
+;;(sum-even-fibs 4000000)
+;; pretty kludgy .. need to rethink this. but fast..
+(defun find-1000-digit-fib()
+  (loop 
+     for x = 0 then y
+     and y = 1 then (+ x y)
+     and z from 0
+     until (= (length (number-to-list x)) 1000)
+     when (> (length (number-to-list x)) 998)
+     collect (cons z (length(number-to-list x)))))
+;;  (format "the ~a fibonacci term has 1000 digits, see ~a" z x))
+;;(find-1000-digit-fib)
 
-;(word-sum "SEAMUS")
-
-;; (my-when t
-;;          (prin1 "it works")
-;;          (prin1 "hurray!"))
-
-;; fibonacci
-;; (loop repeat 5 
-;;       for x = 0 then y
-;;       and y = 1 then (+ x y)
-;;       collect (+ x y)) 
-;(mapcar #'collatz-chain-num (number-sequence 1 10))
-
-;(collatz-list 100)
-;;(collatz-num 1)
-;;(collatz-chain 3)
-;;(collatz-chain-num 13)
-;;(read-lines-into-number "nums8.txt")
-;;(reduce #'+ (read-lines-into-list "nums.txt"))
-;;(pal-num-p 1232)
-;;(palindrome-p "lapal")
-;;(palindrome-p "1232")
-;;(prime-factors 600851475143)
-;;(reduce #'+ (mult-3-or-5-range 1 999))
-;;(reduce #'+ (number-to-list (factorial 1000)))
-;;(reduce #'+ (number-to-list (expt 2 1000)))
-
+;;(length (number-to-list 123) )
