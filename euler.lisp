@@ -227,3 +227,13 @@
 ;;(find-1000-digit-fib)
 
 ;;(length (number-to-list 123) )
+
+
+(defun div-by-range-p (start stop)
+  (loop for num from start to stop
+     when (every (lambda(n) (divp n num))  (number-sequence 11 20))
+       collect num))
+
+;(defparameter *top* (reduce #'* (number-sequence 11 19)))
+;(div-by-range-p 100000000 *top*)
+
