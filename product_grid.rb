@@ -17,7 +17,7 @@ class ProductGrid
     grid
   end
 
-  def get_largest_diag_down_products(grid)
+  def get_largest_diag_dl_products(grid)
     max_prod = 1
     max_sq = 1
     cur = 0
@@ -31,26 +31,26 @@ class ProductGrid
         end
       end
     end
-    puts "highest diag-down product was #{max_prod} on square: #{max_sq}"
+    puts "highest diag-dl product was #{max_prod} on square: #{max_sq}"
     max_prod
   end
 
 
-  def get_largest_diag_products(grid)
+  def get_largest_diag_dr_products(grid)
     max_prod = 1
     max_sq = 1
     cur = 0
     0.upto(MAX-4).each do |r|
       0.upto(MAX-4).each do |c|
         cur = grid[r][c] * grid[r+1][c+1] * grid[r+2][c+2] * grid[r+3][c+3]
-        # p "DIAG: #{r},#{c} * #{r+1},#{c+1} * #{r+2},#{c+2} * #{r+3},#{c+3} => #{cur}"
+        # p "DIAG-DR: #{r},#{c} * #{r+1},#{c+1} * #{r+2},#{c+2} * #{r+3},#{c+3} => #{cur}"
         if cur > max_prod
           max_prod = cur
           max_sq = "#{r},#{c}"
         end
       end
     end
-    puts "highest diag product was #{max_prod} on square: #{max_sq}"
+    puts "highest diag-dr product was #{max_prod} on square: #{max_sq}"
     max_prod
   end
   
@@ -92,10 +92,10 @@ class ProductGrid
   
   def find_largest_prods()
     max = []
-    max[0] = get_largest_diag_products(@grid)
+    max[0] = get_largest_diag_dl_products(@grid)
+    max[3] = get_largest_diag_dr_products(@grid)
     max[1] = get_largest_across_prods(@grid)
     max[2] = get_largest_down_prods(@grid)
-    max[3] = get_largest_diag_down_products(@grid)
     puts "found max #{max.max}"
   end
 end
